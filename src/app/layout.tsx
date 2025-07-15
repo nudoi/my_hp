@@ -24,6 +24,60 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Disable Developer Tools
+              document.addEventListener('keydown', function(e) {
+                // F12
+                if (e.key === 'F12') {
+                  e.preventDefault();
+                  return false;
+                }
+                
+                // Ctrl+Shift+I (Chrome DevTools)
+                if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                  e.preventDefault();
+                  return false;
+                }
+                
+                // Ctrl+Shift+J (Chrome Console)
+                if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                  e.preventDefault();
+                  return false;
+                }
+                
+                // Ctrl+U (View Source)
+                if (e.ctrlKey && e.key === 'u') {
+                  e.preventDefault();
+                  return false;
+                }
+                
+                // Ctrl+Shift+C (Chrome Elements)
+                if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                  e.preventDefault();
+                  return false;
+                }
+              });
+              
+              // Disable right-click context menu
+              document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+              });
+              
+              // Disable Ctrl+Shift+I through keyup as well
+              document.addEventListener('keyup', function(e) {
+                if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                  e.preventDefault();
+                  return false;
+                }
+              });
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
